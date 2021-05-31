@@ -21,7 +21,7 @@ public class EmailManager implements  EmailService{
     @Override
     public Result sendEmail(String email) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("senius.33@gmail.com");
+        simpleMailMessage.setFrom("Your gmail");
         simpleMailMessage.setTo(email);
         simpleMailMessage.setSubject("Register");
         simpleMailMessage.setText("You have been registered successfully");
