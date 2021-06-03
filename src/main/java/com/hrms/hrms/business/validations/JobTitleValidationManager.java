@@ -20,7 +20,7 @@ public class JobTitleValidationManager implements ValidationService<JobTitle> {
     }
 
     public DataResult<List<JobTitle>> getAll(){
-        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),"Job title listed");
+        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),"Job titles have been listed");
     }
 
     public Result add(JobTitle jobTitle){
@@ -30,7 +30,7 @@ public class JobTitleValidationManager implements ValidationService<JobTitle> {
         }
 
         this.jobTitleDao.save(jobTitle);
-        return new SuccessResult("Job Title added");
+        return new SuccessResult("Job title has been added");
 
     }
 

@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Data
@@ -33,6 +34,6 @@ public class Candidate extends User {
     private String nationalIdentity;
 
     @Column(name = "birth_date")
-    private LocalDate birthDate;
+    private Date birthDate;
 
 }

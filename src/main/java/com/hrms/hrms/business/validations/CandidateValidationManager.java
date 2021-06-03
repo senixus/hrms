@@ -23,7 +23,7 @@ public class CandidateValidationManager implements ValidationService<Candidate> 
 
 
     @Autowired
-    public CandidateValidationManager(CandidateDao candidateDao,UserDao userDao,@Qualifier("realMernis") UserCheckService userCheckService,EmailService emailService){
+    public CandidateValidationManager(CandidateDao candidateDao,UserDao userDao,@Qualifier("fakeMernis") UserCheckService userCheckService,EmailService emailService){
         this.candidateDao = candidateDao;
         this.userDao = userDao;
         this.userCheckService = userCheckService;
@@ -51,9 +51,8 @@ public class CandidateValidationManager implements ValidationService<Candidate> 
             return new ErrorResult("National Identity is not valid");
         }
 
-
         this.candidateDao.save(candidate);
-        this.emailService.sendEmail(candidate.getEmail());
-        return new SuccessResult("Candidate added");
+     //   this.emailService.sendEmail(candidate.getEmail());
+        return new SuccessResult("Candidate has been added");
     }
 }

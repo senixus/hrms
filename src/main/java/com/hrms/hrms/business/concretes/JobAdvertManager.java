@@ -26,7 +26,7 @@ public class JobAdvertManager implements JobAdvertService {
 
     @Override
     public DataResult<List<JobAdvert>> getByIsActiveTrue() {
-        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByIsActiveTrue(),"Job adverts listed");
+        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByIsActiveTrue(),"Job adverts have been listed");
     }
 
     @Override
@@ -37,13 +37,13 @@ public class JobAdvertManager implements JobAdvertService {
 
     @Override
     public DataResult<List<JobAdvert>> getByIsActiveTrueAndEmployerId(int employerId) {
-        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByIsActiveTrueAndEmployerId(employerId),"Job adverts listed by employer id");
+        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByIsActiveTrueAndEmployerId(employerId),"Job adverts have been listed by employer id");
     }
 
     @Override
     public DataResult<List<JobAdvert>> getAllByCreatedAt() {
         Sort sort = Sort.by(Sort.Direction.DESC,"createdAt");
-        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByIsActiveTrue(sort),"Job adverts listed by created at");
+        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByIsActiveTrue(sort),"Job adverts have been listed by created at");
     }
 
     @Override
