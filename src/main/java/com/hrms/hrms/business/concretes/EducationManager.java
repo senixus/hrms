@@ -1,12 +1,14 @@
 package com.hrms.hrms.business.concretes;
 
 import com.hrms.hrms.business.abstracts.EducationService;
+import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.EducationDao;
 import com.hrms.hrms.entities.concretes.Education;
+import com.hrms.hrms.entities.dtos.EducationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +18,24 @@ import java.util.List;
 public class EducationManager implements EducationService {
 
     private EducationDao educationDao;
+    private DtoConverterService dtoConverterService;
+
 
     @Autowired
-    public EducationManager(EducationDao educationDao){
+    public EducationManager(EducationDao educationDao,DtoConverterService dtoConverterService){
         this.educationDao = educationDao;
+        this.dtoConverterService = dtoConverterService;
     }
 
 
     @Override
-    public Result add(Education education) {
-        this.educationDao.save(education);
+    public Result add(EducationDto educationDto) {
+        this.educationDao.save((Education) this.dtoConverterService.dtoClassConverter(educationDto,Education.class));
         return new SuccessResult("Added");
     }
 
     @Override
-    public DataResult<List<Education>> getAll() {
-        return new SuccessDataResult<List<Education>>(this.educationDao.findAll(),"Educations have been listed");
+    public DataResult<List<EducationDto>> getAll() {
+        return new SuccessDataResult<List<EducationDto>>(this.dtoConverterService.dtoConverter(this.educationDao.findAll(),EducationDto.class),"Educations have been listed");
     }
 }

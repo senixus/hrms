@@ -5,6 +5,7 @@ import com.hrms.hrms.business.abstracts.EducationService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Education;
+import com.hrms.hrms.entities.dtos.EducationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +23,13 @@ public class EducationController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<Education>> getAll(){
+    public DataResult<List<EducationDto>> getAll(){
         return this.educationService.getAll();
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Education education){
-        return this.educationService.add(education);
+    public Result add(@RequestBody EducationDto educationDto){
+        return this.educationService.add(educationDto);
     }
 
 

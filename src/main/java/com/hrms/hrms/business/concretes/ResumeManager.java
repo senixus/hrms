@@ -2,6 +2,7 @@ package com.hrms.hrms.business.concretes;
 
 import com.hrms.hrms.business.abstracts.ResumeService;
 import com.hrms.hrms.core.utilities.cloudinary.CloudinaryService;
+import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
@@ -20,11 +21,13 @@ public class ResumeManager implements ResumeService {
 
     private ResumeDao resumeDao;
     private CloudinaryService cloudinaryService;
+    private DtoConverterService dtoConverterService;
 
     @Autowired
-    public ResumeManager(ResumeDao resumeDao,CloudinaryService cloudinaryService){
+    public ResumeManager(ResumeDao resumeDao,CloudinaryService cloudinaryService,DtoConverterService dtoConverterService){
         this.resumeDao = resumeDao;
         this.cloudinaryService = cloudinaryService;
+        this.dtoConverterService = dtoConverterService;
     }
 
     @Override

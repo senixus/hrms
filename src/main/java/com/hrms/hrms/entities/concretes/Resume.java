@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -39,10 +40,10 @@ public class Resume {
     private String description;
 
     @Column(name="created_at")
-    private Date createdAt;
+    private LocalDate createdAt = LocalDate.now();
 
     @Column(name="updated_at")
-    private Date updatedAt;
+    private LocalDate updatedAt;
 
     @Column(name="is_active")
     private boolean isActive = true;

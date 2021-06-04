@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 @Data
@@ -40,12 +40,12 @@ public class Education {
     private String schoolDepartment;
 
     @Column(name = "started_at")
-    private Date startedAt;
+    private LocalDate startedAt;
 
     @Column(name = "graduate_at")
-    private Date graduateAt;
+    private LocalDate graduateAt;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDate createdAt = LocalDate.now();
 
 }
