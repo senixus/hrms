@@ -9,6 +9,7 @@ import com.hrms.hrms.entities.dtos.EducationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -32,5 +33,9 @@ public class EducationController {
         return this.educationService.add(educationDto);
     }
 
+    @GetMapping("/getAllByResumeIdOrderByStartedAtDesc")
+    public DataResult<List<EducationDto>> getAllByResumeIdOrderByStartedAtDesc(int id){
+        return this.educationService.getAllByResumeIdOrderByStartedAtDesc(id);
+    }
 
 }

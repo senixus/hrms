@@ -13,4 +13,6 @@ public interface EducationService {
 
     DataResult<List<EducationDto>> getAll();
 
+    DataResult<List<EducationDto>> getAllByResumeIdOrderByStartedAtDesc(int id);
+
 }

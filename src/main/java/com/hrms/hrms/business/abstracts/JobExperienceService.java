@@ -12,4 +12,6 @@ public interface JobExperienceService {
     Result add(JobExperience jobExperience);
 
     DataResult<List<JobExperience>> getAll();
+
+    DataResult<List<JobExperience>> getAllByResumeIdOrderByStartedAtDesc(int id);
 }

@@ -30,4 +30,9 @@ public class JobExperienceController {
         return this.jobExperienceService.add(jobExperience);
     }
 
+    @GetMapping("/getAllByResumeIdOrderByStartedAtDesc")
+    public DataResult<List<JobExperience>> getAllByResumeIdOrderByStartedAtDesc(int id) {
+        return this.jobExperienceService.getAllByResumeIdOrderByStartedAtDesc(id);
+    }
+
 }

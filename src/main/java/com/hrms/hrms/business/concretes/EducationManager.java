@@ -36,6 +36,15 @@ public class EducationManager implements EducationService {
 
     @Override
     public DataResult<List<EducationDto>> getAll() {
-        return new SuccessDataResult<List<EducationDto>>(this.dtoConverterService.dtoConverter(this.educationDao.findAll(),EducationDto.class),"Educations have been listed");
+        return new SuccessDataResult<List<EducationDto>>
+                (this.dtoConverterService.dtoConverter(this.educationDao.findAll(),EducationDto.class)
+                        ,"Educations have been listed");
+    }
+
+    @Override
+    public DataResult<List<EducationDto>> getAllByResumeIdOrderByStartedAtDesc(int id) {
+        return new SuccessDataResult<List<EducationDto>>
+                (this.dtoConverterService.dtoConverter(this.educationDao.getAllByResumeIdOrderByStartedAtDesc(id),
+                        EducationDto.class),"Educations have been listed");
     }
 }
