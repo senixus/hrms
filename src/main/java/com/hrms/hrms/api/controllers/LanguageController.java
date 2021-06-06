@@ -5,6 +5,7 @@ import com.hrms.hrms.business.abstracts.LanguageService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.entities.concretes.Language;
+import com.hrms.hrms.entities.dtos.LanguageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +23,13 @@ public class LanguageController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<Language>> getAll(){
+    public DataResult<List<LanguageDto>> getAll(){
         return this.languageService.getAll();
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Language language){
-        return this.languageService.add(language);
+    public Result add(@RequestBody LanguageDto languageDto){
+        return this.languageService.add(languageDto);
     }
 
 }

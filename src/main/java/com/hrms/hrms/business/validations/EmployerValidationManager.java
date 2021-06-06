@@ -28,10 +28,16 @@ public class EmployerValidationManager implements ValidationService<Employer> {
 
     @Override
     public Result add(Employer employer) {
+        String[] email = employer.getEmail().split("@");
+
+        if(!email[1].equals(employer.getWebsite())){
+            return new ErrorResult("Website must be equal your email");
+        }
+
         if(this.userDao.existsByEmail(employer.getEmail())){
             return new ErrorResult("Email already exist");
         }
-        if(!employer.getEmail().equals(employer.getConfirmPassword())){
+        if(!employer.getPassword().equals(employer.getConfirmPassword())){
             return new ErrorResult("Passwords do not match");
         }
 

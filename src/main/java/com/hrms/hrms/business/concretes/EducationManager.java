@@ -2,10 +2,7 @@ package com.hrms.hrms.business.concretes;
 
 import com.hrms.hrms.business.abstracts.EducationService;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
-import com.hrms.hrms.core.utilities.results.DataResult;
-import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.core.utilities.results.SuccessDataResult;
-import com.hrms.hrms.core.utilities.results.SuccessResult;
+import com.hrms.hrms.core.utilities.results.*;
 import com.hrms.hrms.dataAccess.abstracts.EducationDao;
 import com.hrms.hrms.entities.concretes.Education;
 import com.hrms.hrms.entities.dtos.EducationDto;
@@ -30,8 +27,12 @@ public class EducationManager implements EducationService {
 
     @Override
     public Result add(EducationDto educationDto) {
-        this.educationDao.save((Education) this.dtoConverterService.dtoClassConverter(educationDto,Education.class));
-        return new SuccessResult("Added");
+   //     if (educationDto.getGraduateAt() != null && !educationDto.getStartedAt().isBefore(educationDto.getGraduateAt())) {
+      ///      return new ErrorResult("hata");
+
+     //   }
+            this.educationDao.save((Education) this.dtoConverterService.dtoClassConverter(educationDto,Education.class));
+            return new SuccessResult("Added");
     }
 
     @Override

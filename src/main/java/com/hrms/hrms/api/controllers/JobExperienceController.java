@@ -3,7 +3,7 @@ package com.hrms.hrms.api.controllers;
 import com.hrms.hrms.business.abstracts.JobExperienceService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.entities.concretes.JobExperience;
+import com.hrms.hrms.entities.dtos.JobExperienceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,17 +21,17 @@ public class JobExperienceController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<JobExperience>> getAll(){
+    public DataResult<List<JobExperienceDto>> getAll(){
         return this.jobExperienceService.getAll();
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody JobExperience jobExperience){
-        return this.jobExperienceService.add(jobExperience);
+    public Result add(@RequestBody JobExperienceDto jobExperiencedto){
+        return this.jobExperienceService.add(jobExperiencedto);
     }
 
     @GetMapping("/getAllByResumeIdOrderByStartedAtDesc")
-    public DataResult<List<JobExperience>> getAllByResumeIdOrderByStartedAtDesc(int id) {
+    public DataResult<List<JobExperienceDto>> getAllByResumeIdOrderByStartedAtDesc(int id) {
         return this.jobExperienceService.getAllByResumeIdOrderByStartedAtDesc(id);
     }
 

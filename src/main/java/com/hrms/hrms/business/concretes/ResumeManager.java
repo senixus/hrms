@@ -9,6 +9,8 @@ import com.hrms.hrms.core.utilities.results.SuccessDataResult;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.ResumeDao;
 import com.hrms.hrms.entities.concretes.Resume;
+import com.hrms.hrms.entities.dtos.ResumeAddDto;
+import com.hrms.hrms.entities.dtos.ResumeGetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,14 +33,16 @@ public class ResumeManager implements ResumeService {
     }
 
     @Override
-    public Result add(Resume resume) {
-        this.resumeDao.save(resume);
+    public Result add(ResumeAddDto resumeAddDto) {
+        this.resumeDao.save((Resume) this.dtoConverterService.dtoClassConverter(resumeAddDto,Resume.class));
         return new SuccessResult("Added");
     }
 
     @Override
-    public DataResult<List<Resume>> getAll() {
-        return new SuccessDataResult<List<Resume>>(this.resumeDao.findAll(),"Resumes have been listed");
+    public DataResult<List<ResumeGetDto>> getAll() {
+        return new SuccessDataResult<List<ResumeGetDto>>
+                (this.dtoConverterService.dtoConverter(this.resumeDao.findAll(),ResumeGetDto.class)
+                        ,"Resumes have been listed");
     }
 
     @Override

@@ -40,7 +40,7 @@ public class JobAdvert {
     private LocalDate lastApplyDate;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDate createdAt = LocalDate.now();
 
     @Column(name = "is_active")
     private boolean isActive;

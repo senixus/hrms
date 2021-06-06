@@ -32,9 +32,7 @@ public class JobAdvertManager implements JobAdvertService {
         this.dtoConverterService = dtoConverterService;
     }
 
-    private JobAdvert dtoConverter(JobAdvertAddDto jobAdvertAddDto){
-        return this.modelMapper.map(jobAdvertAddDto,JobAdvert.class);
-    }
+
 
 
     @Override
@@ -48,7 +46,7 @@ public class JobAdvertManager implements JobAdvertService {
     @Override
     public Result add(JobAdvertAddDto jobAdvertAddDto) {
 
-       this.jobAdvertDao.save(this.dtoConverter(jobAdvertAddDto));
+       this.jobAdvertDao.save((JobAdvert) this.dtoConverterService.dtoClassConverter(jobAdvertAddDto,JobAdvert.class));
 
         return new SuccessResult("Job advert has been added");
     }

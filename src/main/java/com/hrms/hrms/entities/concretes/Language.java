@@ -36,5 +36,5 @@ public class Language {
     private String langLevel;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDate createdAt = LocalDate.now();
 }

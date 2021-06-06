@@ -1,6 +1,8 @@
 package com.hrms.hrms.entities.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +21,12 @@ public class EducationDto {
 
     private int resumeId;
 
-    private String schoolName;
-
+    @JsonProperty(access = Access.WRITE_ONLY)
     private int graduateId;
+
+    private String graduateDescription;
+
+    private String schoolName;
 
     private String schoolDepartment;
 
@@ -29,6 +34,7 @@ public class EducationDto {
 
     private LocalDate graduateAt;
 
+    private LocalDate createdAt;
 
 
 }

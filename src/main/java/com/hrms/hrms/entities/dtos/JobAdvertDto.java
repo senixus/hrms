@@ -13,9 +13,6 @@ import java.time.LocalDate;
 
 public class JobAdvertDto {
 
-    @JsonIgnore
-    private int id;
-
     private String jobDetails;
 
     private String jobTitleTitle;

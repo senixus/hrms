@@ -29,10 +29,7 @@ public class JobAdvertAddDto {
 
     private int numberOfOpenPosition;
 
-    private LocalDate createdAt;
-
     private LocalDate lastApplyDate;
-
 
 
 }
