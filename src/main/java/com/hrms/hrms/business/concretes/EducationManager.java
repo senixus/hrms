@@ -27,10 +27,10 @@ public class EducationManager implements EducationService {
 
     @Override
     public Result add(EducationDto educationDto) {
-   //     if (educationDto.getGraduateAt() != null && !educationDto.getStartedAt().isBefore(educationDto.getGraduateAt())) {
-      ///      return new ErrorResult("hata");
+       if (educationDto.getGraduateAt() != null && !educationDto.getStartedAt().isBefore(educationDto.getGraduateAt())) {
+            return new ErrorResult("hata");
 
-     //   }
+      }
             this.educationDao.save((Education) this.dtoConverterService.dtoClassConverter(educationDto,Education.class));
             return new SuccessResult("Added");
     }

@@ -58,5 +58,12 @@ public class ResumeManager implements ResumeService {
         return new SuccessResult("Kayıt başarılı");
     }
 
+    @Override
+    public DataResult<List<ResumeGetDto>> getAllResumeByCandidateId(int id) {
+        return new SuccessDataResult<List<ResumeGetDto>>
+                (this.dtoConverterService.dtoConverter(this.resumeDao.getAllResumeByCandidateId(id),ResumeGetDto.class),
+                        "Resumes have been listed");
+    }
+
 
 }

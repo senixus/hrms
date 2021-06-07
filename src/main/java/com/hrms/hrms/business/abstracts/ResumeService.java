@@ -15,4 +15,6 @@ public interface ResumeService {
     DataResult<List<ResumeGetDto>> getAll();
 
     Result saveImage(MultipartFile file, int resumeId);
+
+    DataResult<List<ResumeGetDto>> getAllResumeByCandidateId(int id);
 }
