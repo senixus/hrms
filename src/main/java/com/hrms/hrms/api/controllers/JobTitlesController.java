@@ -10,6 +10,8 @@ import com.hrms.hrms.entities.concretes.JobTitle;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@CrossOrigin
+
 @RestController
 @RequestMapping("/api/job-titles")
 public class JobTitlesController {

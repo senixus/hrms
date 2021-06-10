@@ -1,6 +1,7 @@
 package com.hrms.hrms.entities.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,9 @@ import java.time.LocalDate;
 
 public class JobAdvertDto {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private int id;
+
     private String jobDetails;
 
     private String jobTitleTitle;
@@ -22,6 +26,8 @@ public class JobAdvertDto {
     private LocalDate lastApplyDate;
 
     private int numberOfOpenPosition;
+
+    private String cityCityName;
 
     private String employerCompanyName;
 }
