@@ -27,7 +27,21 @@ public class JobAdvertDto {
 
     private int numberOfOpenPosition;
 
+    private int minSalary;
+
+    private int maxSalary;
+
+    private boolean isActive;
+
+    private boolean isConfirm;
+
     private String cityCityName;
 
     private String employerCompanyName;
+
+    private String employerWebsite;
+
+    private String workTimeDescription;
+
+    private String workPlaceDescription;
 }

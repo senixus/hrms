@@ -21,6 +21,10 @@ public class JobAdvertAddDto {
 
     private int cityId;
 
+    private int workTimeId;
+
+    private int workPlaceId;
+
     private String jobDetails;
 
     private int minSalary;

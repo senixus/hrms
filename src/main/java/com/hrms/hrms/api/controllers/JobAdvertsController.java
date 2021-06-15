@@ -39,14 +39,50 @@ public class JobAdvertsController {
         return  this.jobAdvertService.getByIsActiveTrueAndEmployerId(employerId);
     }
 
-    @GetMapping("/getAllByCreatedAt")
-    public DataResult<List<JobAdvertDto>> getAllByCreatedAt() {
-        return  this.jobAdvertService.getAllByCreatedAt();
+    @GetMapping("/getByIsActiveTrueOrderByCreatedAtDesc")
+    public DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc() {
+        return  this.jobAdvertService.getByIsActiveTrueOrderByCreatedAtDesc();
     }
 
     @PostMapping("/update")
     public Result update(@RequestParam int id,@RequestParam boolean isActive) {
         return  this.jobAdvertService.update(id,isActive);
+    }
+
+    @GetMapping("/getJobAdvertById")
+    public DataResult<List<JobAdvertDto>> getJobAdvertById(@RequestParam int id) {
+        return this.jobAdvertService.getJobAdvertById(id);
+    }
+
+    @GetMapping("/confirmJobAdvert")
+    public Result confirmJobAdvert(@RequestParam int id){
+        return this.jobAdvertService.confirmJobAdvert(id);
+    }
+
+
+    @GetMapping("/getByIsConfirmTrueAndEmployerId")
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndEmployerId(@RequestParam int employerId) {
+        return this.jobAdvertService.getByIsConfirmTrueAndEmployerId(employerId);
+    }
+
+    @GetMapping("/getByIsActiveFalseAndEmployerId")
+    public DataResult<List<JobAdvertDto>> getByIsActiveFalseAndEmployerId(@RequestParam int employerId) {
+        return this.jobAdvertService.getByIsActiveFalseAndEmployerId(employerId);
+    }
+
+    @GetMapping("/getByIsConfirmTrueAndIsActiveTrueAndEmployerId")
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueAndEmployerId(@RequestParam int employerId) {
+        return this.jobAdvertService.getByIsConfirmTrueAndIsActiveTrueAndEmployerId(employerId);
+    }
+
+    @GetMapping("/getByIsConfirmFalseAndIsActiveTrueAndEmployerId")
+    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrueAndEmployerId(@RequestParam int employerId) {
+        return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrueAndEmployerId(employerId);
+    }
+
+    @GetMapping("/getByIsConfirmFalseAndIsActiveTrue")
+    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrue() {
+        return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrue();
     }
 
 }
