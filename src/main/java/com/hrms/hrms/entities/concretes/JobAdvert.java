@@ -43,7 +43,10 @@ public class JobAdvert {
     private LocalDate createdAt = LocalDate.now();
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean isActive = false;
+
+    @Column(name = "is_confirm")
+    private boolean isConfirm = false;
 
     @ManyToOne
     @JoinColumn(name = "job_title_id")
@@ -56,6 +59,14 @@ public class JobAdvert {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "work_time_id")
+    private WorkTime workTime;
+
+    @ManyToOne(targetEntity = WorkPlace.class)
+    @JoinColumn(name = "work_place_id",referencedColumnName = "id")
+    private WorkPlace workPlace;
 
 
 }

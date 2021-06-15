@@ -17,9 +17,22 @@ public interface JobAdvertService {
 
     DataResult<List<JobAdvertDto>> getByIsActiveTrueAndEmployerId(int employerId);
 
-    DataResult<List<JobAdvertDto>> getAllByCreatedAt();
+    DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc();
+
+    DataResult<List<JobAdvertDto>> getByIsActiveFalseAndEmployerId(int employerId);
+
+    DataResult<List<JobAdvertDto>> getJobAdvertById(int id);
+
+    DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndEmployerId(int employerId);
+
+    DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueAndEmployerId(int employerId);
 
     Result update(int id,boolean isActive);
 
+    Result confirmJobAdvert(int id);
+
+    DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrue();
+
+    DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrueAndEmployerId(int employerId);
 
 }
