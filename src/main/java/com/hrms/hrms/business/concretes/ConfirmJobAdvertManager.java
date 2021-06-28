@@ -5,6 +5,7 @@ import com.hrms.hrms.core.utilities.results.ErrorResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.ConfirmJobAdvertDao;
+import com.hrms.hrms.dataAccess.abstracts.EmployeeDao;
 import com.hrms.hrms.dataAccess.abstracts.EmployerDao;
 import com.hrms.hrms.dataAccess.abstracts.JobAdvertDao;
 import com.hrms.hrms.entities.concretes.ConfirmJobAdvert;
@@ -21,11 +22,13 @@ public class ConfirmJobAdvertManager implements ConfirmJobAdvertService {
 
     private ConfirmJobAdvertDao confirmJobAdvertDao;
     private JobAdvertDao jobAdvertDao;
+    private EmployeeDao employeeDao;
 
     @Autowired
-    public ConfirmJobAdvertManager(ConfirmJobAdvertDao confirmJobAdvertDao,JobAdvertDao jobAdvertDao){
+    public ConfirmJobAdvertManager(ConfirmJobAdvertDao confirmJobAdvertDao,JobAdvertDao jobAdvertDao,EmployeeDao employeeDao){
         this.confirmJobAdvertDao = confirmJobAdvertDao;
         this.jobAdvertDao = jobAdvertDao;
+        this.employeeDao = employeeDao;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class ConfirmJobAdvertManager implements ConfirmJobAdvertService {
     }
 
     @Override
-    public Result confirmJobAdvert(int jobAdvertId) {
+    public Result confirmJobAdvert(int jobAdvertId,int employeeId) {
 
         if(!this.jobAdvertDao.existsById(jobAdvertId)){
             return new ErrorResult("Job advert not found");
@@ -54,13 +57,15 @@ public class ConfirmJobAdvertManager implements ConfirmJobAdvertService {
 
         ConfirmJobAdvert confirmJobAdvert = new ConfirmJobAdvert();
         JobAdvert jobAdvert = new JobAdvert();
-
+        Employee employee = this.employeeDao.findById(employeeId).orElse(null);
         jobAdvert = this.jobAdvertDao.getById(jobAdvertId);
         jobAdvert.setConfirm(true);
         this.jobAdvertDao.save(jobAdvert);
 
         confirmJobAdvert = this.confirmJobAdvertDao.getById(jobAdvert.getId());
+
         confirmJobAdvert.setConfirmed(true);
+        confirmJobAdvert.setEmployee(employee);
 
         LocalDate date = LocalDate.now();
 

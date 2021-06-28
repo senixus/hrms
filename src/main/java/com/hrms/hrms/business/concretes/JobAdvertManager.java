@@ -2,7 +2,6 @@ package com.hrms.hrms.business.concretes;
 
 import com.hrms.hrms.business.abstracts.ConfirmJobAdvertService;
 import com.hrms.hrms.business.abstracts.JobAdvertService;
-import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterManager;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
 import com.hrms.hrms.core.utilities.results.*;
 import com.hrms.hrms.dataAccess.abstracts.EmployerDao;
@@ -28,6 +27,8 @@ public class JobAdvertManager implements JobAdvertService {
     private DtoConverterService dtoConverterService;
     private EmployerDao employerDao;
     private ConfirmJobAdvertService confirmJobAdvertService;
+    private int jobTitleId;
+    private int jobTitleId1;
 
 
     @Autowired
@@ -38,8 +39,6 @@ public class JobAdvertManager implements JobAdvertService {
         this.employerDao = employerDao;
         this.confirmJobAdvertService = confirmJobAdvertService;
     }
-
-
 
 
     @Override
@@ -59,40 +58,43 @@ public class JobAdvertManager implements JobAdvertService {
     }
 
     @Override
-    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(int pageNo,int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(int pageNo, int pageSize, int workTimeId,int workPlaceId,int cityId) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
+
         return new SuccessDataResult<List<JobAdvertDto>>
-                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(pageable),JobAdvertDto.class),
+                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(pageable, workTimeId,workPlaceId,cityId),JobAdvertDto.class),
                         "Job adverts have been listed");
     }
 
     @Override
-    public DataResult<List<JobAdvertDto>> getByIsActiveTrueAndEmployerId(int employerId) {
+    public DataResult<List<JobAdvertDto>> getByIsActiveTrueAndEmployerId(int employerId,int pageNo,int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
         if(!this.employerDao.existsById(employerId)){
             return new ErrorDataResult<>("Employer  not found");
         }
      return new SuccessDataResult<List<JobAdvertDto>>
-             (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsActiveTrueAndEmployerId(employerId),JobAdvertDto.class)
+             (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsActiveTrueAndEmployerId(pageable,employerId),JobAdvertDto.class)
                      ,"Success");
 
     }
 
     @Override
-    public DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc() {
-      //  Sort sort = Sort.by(Sort.Direction.DESC,"createdAt");
+    public DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc(int pageNo,int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
         return new SuccessDataResult<List<JobAdvertDto>>
-                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsActiveTrueOrderByCreatedAtDesc(),JobAdvertDto.class),
+                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsActiveTrueOrderByCreatedAtDesc(pageable),JobAdvertDto.class),
                         "Job adverts have been listed by created at");
     }
 
     @Override
-    public DataResult<List<JobAdvertDto>> getByIsActiveFalseAndEmployerId(int employerId) {
+    public DataResult<List<JobAdvertDto>> getByIsActiveFalseAndEmployerId(int employerId,int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
         if(!this.employerDao.existsById(employerId)){
             return new ErrorDataResult<List<JobAdvertDto>>("Employer not found");
         }
 
         return new SuccessDataResult<List<JobAdvertDto>>
-                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsActiveFalseAndEmployerId(employerId),JobAdvertDto.class),
+                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsActiveFalseAndEmployerId(pageable,employerId),JobAdvertDto.class),
                         "Job adverts have been listed");
     }
 
@@ -141,12 +143,13 @@ public class JobAdvertManager implements JobAdvertService {
     }
 
     @Override
-    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueAndEmployerId(int employerId) {
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueAndEmployerId(int employerId,int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
         if(!this.employerDao.existsById(employerId)){
             return new SuccessDataResult<List<JobAdvertDto>>("Employer not found");
         }
         return new SuccessDataResult<List<JobAdvertDto>>
-                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmTrueAndIsActiveTrueAndEmployerId(employerId),JobAdvertDto.class),
+                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmTrueAndIsActiveTrueAndEmployerId(pageable,employerId),JobAdvertDto.class),
                         "Job adverts have been listed");
     }
 
@@ -171,21 +174,22 @@ public class JobAdvertManager implements JobAdvertService {
     }
 
     @Override
-    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrue() {
+    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrue(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
         return new SuccessDataResult<List<JobAdvertDto>>
-                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmFalseAndIsActiveTrue(),JobAdvertDto.class),
+                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmFalseAndIsActiveTrue(pageable),JobAdvertDto.class),
                         "Job Adverts have been listed");
     }
 
     @Override
-    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrueAndEmployerId(int employerId) {
-
+    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrueAndEmployerId(int employerId,int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
         if(!this.employerDao.existsById(employerId)){
             return new ErrorDataResult<>("Employer not found");
         }
 
         return new SuccessDataResult<List<JobAdvertDto>>
-                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmFalseAndIsActiveTrueAndEmployerId(employerId),JobAdvertDto.class),
+                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmFalseAndIsActiveTrueAndEmployerId(pageable,employerId),JobAdvertDto.class),
                         "Job Adverts have been listed");
     }
 }

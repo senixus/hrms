@@ -3,7 +3,6 @@ package com.hrms.hrms.api.controllers;
 import com.hrms.hrms.business.abstracts.JobAdvertService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.entities.concretes.JobAdvert;
 import com.hrms.hrms.entities.dtos.JobAdvertAddDto;
 import com.hrms.hrms.entities.dtos.JobAdvertDto;
 import org.springframework.web.bind.annotation.*;
@@ -35,13 +34,13 @@ public class JobAdvertsController {
     }
 
     @PostMapping("/getByIsActiveTrueAndEmployerId")
-    public DataResult<List<JobAdvertDto>> getByIsActiveTrueAndEmployerId(@RequestParam int employerId){
-        return  this.jobAdvertService.getByIsActiveTrueAndEmployerId(employerId);
+    public DataResult<List<JobAdvertDto>> getByIsActiveTrueAndEmployerId(@RequestParam int employerId, @RequestParam int pageNo, @RequestParam int pageSize){
+        return  this.jobAdvertService.getByIsActiveTrueAndEmployerId(employerId,pageNo,pageSize);
     }
 
     @GetMapping("/getByIsActiveTrueOrderByCreatedAtDesc")
-    public DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc() {
-        return  this.jobAdvertService.getByIsActiveTrueOrderByCreatedAtDesc();
+    public DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc(int pageNo,int pageSize) {
+        return  this.jobAdvertService.getByIsActiveTrueOrderByCreatedAtDesc(pageNo,pageSize);
     }
 
     @PostMapping("/update")
@@ -66,28 +65,28 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/getByIsActiveFalseAndEmployerId")
-    public DataResult<List<JobAdvertDto>> getByIsActiveFalseAndEmployerId(@RequestParam int employerId) {
-        return this.jobAdvertService.getByIsActiveFalseAndEmployerId(employerId);
+    public DataResult<List<JobAdvertDto>> getByIsActiveFalseAndEmployerId(@RequestParam int employerId,@RequestParam int pageNo,@RequestParam int pageSize) {
+        return this.jobAdvertService.getByIsActiveFalseAndEmployerId(employerId,pageNo,pageSize);
     }
 
     @GetMapping("/getByIsConfirmTrueAndIsActiveTrueAndEmployerId")
-    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueAndEmployerId(@RequestParam int employerId) {
-        return this.jobAdvertService.getByIsConfirmTrueAndIsActiveTrueAndEmployerId(employerId);
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueAndEmployerId(@RequestParam int employerId,@RequestParam int pageNo,@RequestParam int pageSize) {
+        return this.jobAdvertService.getByIsConfirmTrueAndIsActiveTrueAndEmployerId(employerId,pageNo,pageSize);
     }
 
     @GetMapping("/getByIsConfirmFalseAndIsActiveTrueAndEmployerId")
-    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrueAndEmployerId(@RequestParam int employerId) {
-        return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrueAndEmployerId(employerId);
+    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrueAndEmployerId(@RequestParam int employerId,@RequestParam int pageNo,@RequestParam int pageSize) {
+        return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrueAndEmployerId(employerId,pageNo,pageSize);
     }
 
     @GetMapping("/getByIsConfirmFalseAndIsActiveTrue")
-    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrue() {
-        return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrue();
+    public DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrue(int pageNo, int pageSize) {
+        return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrue(pageNo,pageSize);
     }
 
-    @GetMapping("/getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc")
-    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(int pageNo,int pageSize) {
-        return this.jobAdvertService.getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(pageNo,pageSize);
+    @PostMapping("/getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId")
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(@RequestParam int pageNo,@RequestParam  int pageSize, int workTimeId,int workPlaceId,int cityId) {
+        return this.jobAdvertService.getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(pageNo,pageSize,workTimeId,workPlaceId,cityId);
     }
 
 }

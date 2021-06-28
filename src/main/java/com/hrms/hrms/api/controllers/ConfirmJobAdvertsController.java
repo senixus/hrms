@@ -21,8 +21,8 @@ public class ConfirmJobAdvertsController {
     }
 
     @GetMapping("/confirmJobAdvert")
-    public Result confirmJobAdvert(@RequestParam int jobAdvertId) {
-        return this.confirmJobAdvertService.confirmJobAdvert(jobAdvertId);
+    public Result confirmJobAdvert(@RequestParam int jobAdvertId, @RequestParam int employeeId) {
+        return this.confirmJobAdvertService.confirmJobAdvert(jobAdvertId,employeeId);
     }
 
 

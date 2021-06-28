@@ -7,6 +7,6 @@ public interface ConfirmJobAdvertService {
 
     void createConfirmJobAdvert(JobAdvert jobAdvert);
 
-    Result confirmJobAdvert(int jobAdvertId);
+    Result confirmJobAdvert(int jobAdvertId,int employeeId);
 
 }
