@@ -15,6 +15,8 @@ public interface JobAdvertService {
 
     Result add(JobAdvertAddDto jobAdvertAddDto);
 
+    DataResult<List<JobAdvertDto>>  getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(int pageNo,int PageSize);
+
     DataResult<List<JobAdvertDto>> getByIsActiveTrueAndEmployerId(int employerId);
 
     DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc();

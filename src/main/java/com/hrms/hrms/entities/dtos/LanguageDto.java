@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 public class LanguageDto {
 
-    @JsonIgnore
+   // @JsonIgnore
     private int id;
 
     private int resumeId;

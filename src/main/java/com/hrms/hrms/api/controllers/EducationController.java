@@ -38,4 +38,13 @@ public class EducationController {
         return this.educationService.getAllByResumeIdOrderByStartedAtDesc(id);
     }
 
+    @GetMapping("/findById")
+    public DataResult<Education> findById(@RequestParam int id) {
+        return this.educationService.findById(id);
+    }
+
+   @PostMapping("/update")
+    public Result update(@RequestBody EducationDto educationDto) {
+        return this.educationService.update(educationDto);
+   }
 }

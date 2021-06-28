@@ -37,4 +37,8 @@ public class JobExperienceController {
         return this.jobExperienceService.getAllByResumeIdOrderByStartedAtDesc(id);
     }
 
+    @PostMapping("/update")
+   public  Result update(@RequestBody JobExperienceDto jobExperienceDto){
+        return this.jobExperienceService.update(jobExperienceDto);
+   }
 }

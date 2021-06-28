@@ -34,4 +34,9 @@ public class LanguageController {
         return this.languageService.add(languageDto);
     }
 
+    @PostMapping("/update")
+    public Result update(@RequestBody LanguageDto languageDto){
+        return this.languageService.update(languageDto);
+    }
+
 }

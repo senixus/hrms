@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 public class EducationDto {
 
-    @JsonIgnore
+   // @JsonIgnore
     private int id;
 
     private int resumeId;

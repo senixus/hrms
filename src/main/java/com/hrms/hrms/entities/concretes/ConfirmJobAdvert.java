@@ -29,7 +29,7 @@ public class ConfirmJobAdvert {
 
 
     @Column(name="is_confirmed")
-    private boolean isConfirmed;
+    private boolean isConfirmed = false;
 
     @Column(name="confirmed_at")
     private LocalDate confirmedAt;

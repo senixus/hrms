@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface JobExperienceDao extends JpaRepository<JobExperience,Integer> {
     List<JobExperience> getAllByResumeIdOrderByStartedAtDesc(int id);
+
+    boolean existsById(int id);
 }

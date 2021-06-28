@@ -2,6 +2,7 @@ package com.hrms.hrms.business.abstracts;
 
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
+import com.hrms.hrms.entities.concretes.Resume;
 import com.hrms.hrms.entities.dtos.ResumeAddDto;
 import com.hrms.hrms.entities.dtos.ResumeGetDto;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,4 +18,8 @@ public interface ResumeService {
     Result saveImage(MultipartFile file, int resumeId);
 
     DataResult<List<ResumeGetDto>> getAllResumeByCandidateId(int id);
+
+    DataResult<Resume> getByResumeId(int id);
+
+
 }

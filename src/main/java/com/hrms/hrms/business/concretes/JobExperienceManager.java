@@ -3,10 +3,7 @@ package com.hrms.hrms.business.concretes;
 
 import com.hrms.hrms.business.abstracts.JobExperienceService;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
-import com.hrms.hrms.core.utilities.results.DataResult;
-import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.core.utilities.results.SuccessDataResult;
-import com.hrms.hrms.core.utilities.results.SuccessResult;
+import com.hrms.hrms.core.utilities.results.*;
 import com.hrms.hrms.dataAccess.abstracts.JobExperienceDao;
 import com.hrms.hrms.entities.concretes.JobExperience;
 import com.hrms.hrms.entities.dtos.JobExperienceDto;
@@ -46,5 +43,16 @@ public class JobExperienceManager implements JobExperienceService {
         return new SuccessDataResult<List<JobExperienceDto>>
                 (this.dtoConverterService.dtoConverter(this.jobExperienceDao.getAllByResumeIdOrderByStartedAtDesc(id)
                         ,JobExperienceDto.class));
+    }
+
+    @Override
+    public Result update(JobExperienceDto jobExperienceDto) {
+        if(!this.jobExperienceDao.existsById(jobExperienceDto.getId())){
+            return new ErrorResult("Job experience has not found");
+        }
+
+        this.jobExperienceDao.save((JobExperience) this.dtoConverterService.dtoClassConverter(jobExperienceDto,JobExperience.class));
+
+        return new SuccessResult("Job experience has been updated");
     }
 }

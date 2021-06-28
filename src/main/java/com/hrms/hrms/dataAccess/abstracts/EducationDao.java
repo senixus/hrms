@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface EducationDao extends JpaRepository<Education,Integer> {
     List<Education> getAllByResumeIdOrderByStartedAtDesc(int id);
+
+    boolean existsById(int id);
 }

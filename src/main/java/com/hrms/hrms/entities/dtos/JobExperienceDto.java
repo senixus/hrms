@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class JobExperienceDto {
 
-    @JsonIgnore
+   // @JsonIgnore
     private int id;
 
     private int resumeId;

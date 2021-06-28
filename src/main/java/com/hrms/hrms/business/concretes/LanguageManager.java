@@ -2,10 +2,7 @@ package com.hrms.hrms.business.concretes;
 
 import com.hrms.hrms.business.abstracts.LanguageService;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
-import com.hrms.hrms.core.utilities.results.DataResult;
-import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.core.utilities.results.SuccessDataResult;
-import com.hrms.hrms.core.utilities.results.SuccessResult;
+import com.hrms.hrms.core.utilities.results.*;
 import com.hrms.hrms.dataAccess.abstracts.LanguageDao;
 import com.hrms.hrms.entities.concretes.Language;
 
@@ -38,5 +35,16 @@ public class LanguageManager implements LanguageService {
         return new SuccessDataResult<List<LanguageDto>>
                 (this.dtoConverterService.dtoConverter(this.languageDao.findAll(),LanguageDto.class)
                         ,"Languages have been listed");
+    }
+
+    @Override
+    public Result update(LanguageDto languageDto) {
+        if(!this.languageDao.existsById(languageDto.getId())){
+            return new ErrorResult("Language have not found");
+        }
+
+        this.languageDao.save((Language) this.dtoConverterService.dtoClassConverter(languageDto,Language.class));
+
+        return new SuccessResult("Language have been updated");
     }
 }

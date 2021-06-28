@@ -11,4 +11,6 @@ public interface ResumeDao extends JpaRepository<Resume,Integer> {
     List<Resume> getAllResumeByCandidateId(int id);
 
 
+
+    boolean existsById(int resumeId);
 }

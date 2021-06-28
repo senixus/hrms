@@ -85,4 +85,9 @@ public class JobAdvertsController {
         return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrue();
     }
 
+    @GetMapping("/getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc")
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(int pageNo,int pageSize) {
+        return this.jobAdvertService.getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(pageNo,pageSize);
+    }
+
 }

@@ -4,6 +4,7 @@ package com.hrms.hrms.api.controllers;
 import com.hrms.hrms.business.abstracts.ResumeService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
+import com.hrms.hrms.entities.concretes.Resume;
 import com.hrms.hrms.entities.dtos.ResumeAddDto;
 import com.hrms.hrms.entities.dtos.ResumeGetDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,12 @@ public class ResumeController {
     @GetMapping("/getAllResumeByCandidateId")
     public DataResult<List<ResumeGetDto>> getAllResumeByCandidateId(@RequestParam int id) {
         return this.resumeService.getAllResumeByCandidateId(id);
+    }
+
+    @GetMapping("/getByResumeId")
+    public DataResult<Resume> getByResumeId(int id) {
+        return this.resumeService.getByResumeId(id);
+
     }
 
 }

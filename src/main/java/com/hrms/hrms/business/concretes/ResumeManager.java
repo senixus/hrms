@@ -3,10 +3,7 @@ package com.hrms.hrms.business.concretes;
 import com.hrms.hrms.business.abstracts.ResumeService;
 import com.hrms.hrms.core.utilities.cloudinary.CloudinaryService;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
-import com.hrms.hrms.core.utilities.results.DataResult;
-import com.hrms.hrms.core.utilities.results.Result;
-import com.hrms.hrms.core.utilities.results.SuccessDataResult;
-import com.hrms.hrms.core.utilities.results.SuccessResult;
+import com.hrms.hrms.core.utilities.results.*;
 import com.hrms.hrms.dataAccess.abstracts.ResumeDao;
 import com.hrms.hrms.entities.concretes.Resume;
 import com.hrms.hrms.entities.dtos.ResumeAddDto;
@@ -63,6 +60,14 @@ public class ResumeManager implements ResumeService {
         return new SuccessDataResult<List<ResumeGetDto>>
                 (this.dtoConverterService.dtoConverter(this.resumeDao.getAllResumeByCandidateId(id),ResumeGetDto.class),
                         "Resumes have been listed");
+    }
+
+    @Override
+    public DataResult<Resume> getByResumeId(int id) {
+        if(!this.resumeDao.existsById(id)){
+            return new ErrorDataResult<Resume>("Resume not found");
+        }
+        return new SuccessDataResult<Resume>(this.resumeDao.findById(id).orElse(null),"Resume has been listed");
     }
 
 

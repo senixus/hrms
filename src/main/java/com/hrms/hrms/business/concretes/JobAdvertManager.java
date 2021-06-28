@@ -1,5 +1,6 @@
 package com.hrms.hrms.business.concretes;
 
+import com.hrms.hrms.business.abstracts.ConfirmJobAdvertService;
 import com.hrms.hrms.business.abstracts.JobAdvertService;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterManager;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
@@ -12,6 +13,8 @@ import com.hrms.hrms.entities.dtos.JobAdvertAddDto;
 import com.hrms.hrms.entities.dtos.JobAdvertDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +27,16 @@ public class JobAdvertManager implements JobAdvertService {
     private ModelMapper modelMapper;
     private DtoConverterService dtoConverterService;
     private EmployerDao employerDao;
+    private ConfirmJobAdvertService confirmJobAdvertService;
 
 
     @Autowired
-    public JobAdvertManager(JobAdvertDao jobAdvertDao, ModelMapper modelMapper, DtoConverterService dtoConverterService,EmployerDao employerDao){
+    public JobAdvertManager(JobAdvertDao jobAdvertDao, ModelMapper modelMapper, DtoConverterService dtoConverterService,EmployerDao employerDao,ConfirmJobAdvertService confirmJobAdvertService){
         this.jobAdvertDao = jobAdvertDao;
         this.modelMapper = modelMapper;
         this.dtoConverterService = dtoConverterService;
         this.employerDao = employerDao;
+        this.confirmJobAdvertService = confirmJobAdvertService;
     }
 
 
@@ -49,8 +54,16 @@ public class JobAdvertManager implements JobAdvertService {
     public Result add(JobAdvertAddDto jobAdvertAddDto) {
 
        this.jobAdvertDao.save((JobAdvert) this.dtoConverterService.dtoClassConverter(jobAdvertAddDto,JobAdvert.class));
-
+       this.confirmJobAdvertService.createConfirmJobAdvert((JobAdvert) this.dtoConverterService.dtoClassConverter(jobAdvertAddDto,JobAdvert.class));
         return new SuccessResult("Job advert has been added");
+    }
+
+    @Override
+    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(int pageNo,int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return new SuccessDataResult<List<JobAdvertDto>>
+                (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmTrueAndIsActiveTrueOrderByCreatedAtDesc(pageable),JobAdvertDto.class),
+                        "Job adverts have been listed");
     }
 
     @Override
@@ -96,6 +109,7 @@ public class JobAdvertManager implements JobAdvertService {
         if(jobAdvert.isConfirm()){
             jobAdvert.setConfirm(false);
         }
+        // Confirm Dao Oluştur
         this.jobAdvertDao.save(jobAdvert);
 
         return new SuccessResult("Job Advert has been updated");
@@ -138,10 +152,18 @@ public class JobAdvertManager implements JobAdvertService {
 
     @Override
     public Result confirmJobAdvert(int id) {
+
         if(!this.jobAdvertDao.existsById(id)){
             return new ErrorResult("Job Advert not found");
         }
        JobAdvert jobAdvert = this.jobAdvertDao.findById(id).orElse(null);
+
+        if(!jobAdvert.isActive()){
+            return new ErrorResult("This job advert did not activate by employer so you cannot confirm it");
+        }
+        if(jobAdvert.isActive() && jobAdvert.isConfirm()){
+            return new ErrorResult("This job advert have already confirmed");
+        }
         jobAdvert.setConfirm(true);
 
         this.jobAdvertDao.save(jobAdvert);

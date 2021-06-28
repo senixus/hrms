@@ -15,4 +15,8 @@ public interface EducationService {
 
     DataResult<List<EducationDto>> getAllByResumeIdOrderByStartedAtDesc(int id);
 
+    DataResult<Education> findById(int id);
+
+    Result update(EducationDto educationDto);
+
 }

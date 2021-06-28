@@ -39,11 +39,11 @@ public class JobExperience {
     private String companyName;
 
     @Column(name = "started_at")
-    private Date startedAt;
+    private LocalDate startedAt;
 
     @Column(name = "ended_at")
-    private Date endedAt;
+    private LocalDate endedAt;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDate createdAt = LocalDate.now();
 }
