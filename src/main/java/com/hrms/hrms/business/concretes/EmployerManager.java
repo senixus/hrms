@@ -30,4 +30,9 @@ public class EmployerManager implements EmployerService {
     public Result add(Employer employer) {
         return this.validationService.add(employer);
     }
+
+    @Override
+    public Result update(Employer employer) {
+        return this.validationService.update(employer);
+    }
 }

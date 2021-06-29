@@ -11,4 +11,6 @@ public interface ValidationService<T> {
 
     Result add(T data);
 
+    Result update(T data);
+
 }

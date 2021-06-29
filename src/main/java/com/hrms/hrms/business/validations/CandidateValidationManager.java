@@ -55,4 +55,18 @@ public class CandidateValidationManager implements ValidationService<Candidate> 
      //   this.emailService.sendEmail(candidate.getEmail());
         return new SuccessResult("Candidate has been added");
     }
+
+    @Override
+    public Result update(Candidate candidate) {
+        if(this.userDao.existsByEmail(candidate.getEmail())){
+            return new ErrorResult("Email already exist");
+        }
+
+        if(!this.userDao.existsById(candidate.getId())){
+            return new ErrorResult("User have not found");
+        }
+
+        this.candidateDao.save(candidate);
+        return new SuccessResult("Candidate has been updated");
+    }
 }

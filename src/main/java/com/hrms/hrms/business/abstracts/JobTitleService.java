@@ -10,4 +10,6 @@ public interface JobTitleService {
     DataResult<List<JobTitle>> getAll();
 
     Result add(JobTitle jobTitle);
+
+    Result update(JobTitle jobTitle);
 }

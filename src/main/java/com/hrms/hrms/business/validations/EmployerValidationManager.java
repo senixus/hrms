@@ -44,4 +44,25 @@ public class EmployerValidationManager implements ValidationService<Employer> {
         this.employerDao.save(employer);
         return new SuccessResult("Employer has been added");
     }
+
+    @Override
+    public Result update(Employer employer) {
+
+        String[] email = employer.getEmail().split("@");
+
+        if(!email[1].equals(employer.getWebsite())){
+            return new ErrorResult("Website must be equal your email");
+        }
+
+        if(this.userDao.existsByEmail(employer.getEmail())){
+            return new ErrorResult("Email already exist");
+        }
+
+        if(!this.userDao.existsById(employer.getId())){
+            return  new ErrorResult("User have not found");
+        }
+
+        this.employerDao.save(employer);
+        return new SuccessResult("Employer has been updated");
+    }
 }

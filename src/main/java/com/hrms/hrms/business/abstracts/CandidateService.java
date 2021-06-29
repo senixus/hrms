@@ -12,4 +12,6 @@ public interface CandidateService {
 
     Result add(Candidate candidate);
 
+    Result update(Candidate candidate);
+
 }

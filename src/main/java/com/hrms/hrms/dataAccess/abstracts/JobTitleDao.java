@@ -8,4 +8,6 @@ public interface JobTitleDao extends JpaRepository<JobTitle, Integer> {
 
     boolean existsByTitle(String title);
 
+    boolean existById(int id);
+
 }

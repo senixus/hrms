@@ -23,8 +23,8 @@ public class JobTitleValidationManager implements ValidationService<JobTitle> {
         return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),"Job titles have been listed");
     }
 
+    @Override
     public Result add(JobTitle jobTitle){
-
         if(this.jobTitleDao.existsByTitle(jobTitle.getTitle())){
             return new ErrorResult("Job title already exist");
         }
@@ -34,6 +34,15 @@ public class JobTitleValidationManager implements ValidationService<JobTitle> {
 
     }
 
+    @Override
+    public Result update(JobTitle jobTitle) {
+        if (!this.jobTitleDao.existsById(jobTitle.getId())){
+            return new ErrorResult("Job Title has not found");
+        }
+
+        this.jobTitleDao.save(jobTitle);
+        return new SuccessResult("Job title has been updated");
+    }
 
 
 }

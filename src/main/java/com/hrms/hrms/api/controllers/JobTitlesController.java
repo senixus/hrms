@@ -40,8 +40,8 @@ public class JobTitlesController {
     }
 
     @PostMapping("/update")
-    public Result update(){
-        return null;
+    public Result update(@RequestBody JobTitle jobTitle){
+        return this.jobTitleService.update(jobTitle);
     }
 
 }

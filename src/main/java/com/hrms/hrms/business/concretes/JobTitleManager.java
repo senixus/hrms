@@ -8,6 +8,7 @@ import com.hrms.hrms.business.validations.JobTitleValidationManager;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
 import com.hrms.hrms.core.utilities.results.SuccessDataResult;
+import com.hrms.hrms.core.utilities.results.SuccessResult;
 import com.hrms.hrms.dataAccess.abstracts.JobTitleDao;
 import com.hrms.hrms.entities.concretes.JobTitle;
 
@@ -32,6 +33,11 @@ public class JobTitleManager implements JobTitleService {
     @Override
     public Result add(JobTitle jobTitle) {
         return this.validationService.add(jobTitle);
+    }
+
+    @Override
+    public Result update(JobTitle jobTitle) {
+        return this.validationService.update(jobTitle);
     }
 
 }

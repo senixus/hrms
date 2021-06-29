@@ -33,5 +33,10 @@ public class CandidateManager implements CandidateService {
         return this.validationService.add(candidate);
     }
 
+    @Override
+    public Result update(Candidate candidate) {
+        return this.validationService.update(candidate);
+    }
+
 
 }
