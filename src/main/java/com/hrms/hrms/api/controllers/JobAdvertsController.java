@@ -3,8 +3,10 @@ package com.hrms.hrms.api.controllers;
 import com.hrms.hrms.business.abstracts.JobAdvertService;
 import com.hrms.hrms.core.utilities.results.DataResult;
 import com.hrms.hrms.core.utilities.results.Result;
+import com.hrms.hrms.entities.concretes.JobAdvert;
 import com.hrms.hrms.entities.dtos.JobAdvertAddDto;
 import com.hrms.hrms.entities.dtos.JobAdvertDto;
+import com.hrms.hrms.entities.dtos.JobAdvertFilterDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -87,6 +89,11 @@ public class JobAdvertsController {
     @PostMapping("/getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId")
     public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(@RequestParam int pageNo,@RequestParam  int pageSize, int workTimeId,int workPlaceId,int cityId) {
         return this.jobAdvertService.getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(pageNo,pageSize,workTimeId,workPlaceId,cityId);
+    }
+
+    @PostMapping("/getByFilter")
+    public DataResult<List<JobAdvert>> getByFilter(JobAdvertFilterDto jobAdvertFilterDto, @RequestParam int pageNo,@RequestParam  int pageSize) {
+        return this.jobAdvertService.getByFilter(jobAdvertFilterDto,pageNo,pageSize);
     }
 
 }

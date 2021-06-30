@@ -10,6 +10,7 @@ import com.hrms.hrms.entities.concretes.ConfirmJobAdvert;
 import com.hrms.hrms.entities.concretes.JobAdvert;
 import com.hrms.hrms.entities.dtos.JobAdvertAddDto;
 import com.hrms.hrms.entities.dtos.JobAdvertDto;
+import com.hrms.hrms.entities.dtos.JobAdvertFilterDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -27,8 +28,7 @@ public class JobAdvertManager implements JobAdvertService {
     private DtoConverterService dtoConverterService;
     private EmployerDao employerDao;
     private ConfirmJobAdvertService confirmJobAdvertService;
-    private int jobTitleId;
-    private int jobTitleId1;
+
 
 
     @Autowired
@@ -191,5 +191,12 @@ public class JobAdvertManager implements JobAdvertService {
         return new SuccessDataResult<List<JobAdvertDto>>
                 (this.dtoConverterService.dtoConverter(this.jobAdvertDao.getByIsConfirmFalseAndIsActiveTrueAndEmployerId(pageable,employerId),JobAdvertDto.class),
                         "Job Adverts have been listed");
+    }
+
+    @Override
+    public DataResult<List<JobAdvert>> getByFilter(JobAdvertFilterDto jobAdvertFilterDto, int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize,Sort.by(Sort.Direction.DESC,"createdAt"));
+        return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByFilter(jobAdvertFilterDto,pageable).getContent(),"Listelendi");
+
     }
 }
