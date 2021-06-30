@@ -40,7 +40,8 @@ public class EmployerValidationManager implements ValidationService<Employer> {
         if(!employer.getPassword().equals(employer.getConfirmPassword())){
             return new ErrorResult("Passwords do not match");
         }
-
+        employer.setUpdateRequest(false);
+        employer.setConfirmed(false);
         this.employerDao.save(employer);
         return new SuccessResult("Employer has been added");
     }
