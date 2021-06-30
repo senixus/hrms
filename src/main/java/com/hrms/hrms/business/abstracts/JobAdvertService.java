@@ -17,8 +17,6 @@ public interface JobAdvertService {
 
     Result add(JobAdvertAddDto jobAdvertAddDto);
 
-    DataResult<List<JobAdvertDto>>  getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(int pageNo, int pageSize,  int workTimeId,int workPlaceId,int cityId);
-
     DataResult<List<JobAdvertDto>> getByIsActiveTrueAndEmployerId(int employerId,int pageNo,int pageSize);
 
     DataResult<List<JobAdvertDto>> getByIsActiveTrueOrderByCreatedAtDesc(int pageNo,int pageSize);
@@ -33,7 +31,7 @@ public interface JobAdvertService {
 
     Result update(int id,boolean isActive);
 
-    Result confirmJobAdvert(int id);
+    Result confirmJobAdvert(int jobAdvertId,int employeeId);
 
     DataResult<List<JobAdvertDto>> getByIsConfirmFalseAndIsActiveTrue(int pageNo, int pageSize);
 

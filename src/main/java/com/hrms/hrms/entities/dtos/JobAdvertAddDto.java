@@ -1,6 +1,7 @@
 package com.hrms.hrms.entities.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class JobAdvertAddDto {
 
-    @JsonIgnore
+   // @JsonIgnore
     private int id;
 
     private int employerId;
@@ -26,6 +27,12 @@ public class JobAdvertAddDto {
     private int workPlaceId;
 
     private String jobDetails;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private boolean isConfirm = false;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private boolean isActive = false;
 
     private int minSalary;
 

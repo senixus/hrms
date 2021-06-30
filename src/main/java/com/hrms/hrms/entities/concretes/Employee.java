@@ -28,6 +28,5 @@ public class Employee extends User {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "employee")
-    private List<ConfirmJobAdvert> confirmJobAdverts;
+
 }

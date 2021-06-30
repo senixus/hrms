@@ -14,19 +14,13 @@ import java.time.LocalDate;
 @Entity
 @Table(name="confirm_job_adverts")
 public class ConfirmJobAdvert {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    @Column(name="job_advert_id")
+    private int jobAdvertId;
 
-    @OneToOne
-    @JoinColumn(name="job_adverts_id")
-    private JobAdvert jobAdvert;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
-
+    @Column(name="employee_id")
+    private int employeeId;
 
     @Column(name="is_confirmed")
     private boolean isConfirmed = false;

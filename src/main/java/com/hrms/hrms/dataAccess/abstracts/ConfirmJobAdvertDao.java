@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ConfirmJobAdvertDao extends JpaRepository<ConfirmJobAdvert,Integer> {
 
-   // ConfirmJobAdvert findByEmployerId(int employerId);
+      boolean existsById(int id);
 
-    boolean existsById(int id);
 }

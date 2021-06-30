@@ -30,8 +30,6 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert,Integer> {
 
     List<JobAdvert> getByIsConfirmFalseAndIsActiveTrue(Pageable pageable);
 
-    List<JobAdvert> getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(Pageable pageable,int workTimeId,int workPlaceId,int cityId);
-
     List<JobAdvert> getByIsConfirmFalseAndIsActiveTrueAndEmployerId(Pageable pageable,int employerId);
 
     @Query("Select j from  com.hrms.hrms.entities.concretes.JobAdvert j where ((:#{#filter.cityId}) IS NULL OR j.city.id IN (:#{#filter.cityId}))"

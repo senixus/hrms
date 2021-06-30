@@ -56,8 +56,8 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/confirmJobAdvert")
-    public Result confirmJobAdvert(@RequestParam int id){
-        return this.jobAdvertService.confirmJobAdvert(id);
+    public Result confirmJobAdvert(@RequestParam int jobAdvertid,@RequestParam int employeeId){
+        return this.jobAdvertService.confirmJobAdvert(jobAdvertid,employeeId);
     }
 
 
@@ -86,10 +86,6 @@ public class JobAdvertsController {
         return this.jobAdvertService.getByIsConfirmFalseAndIsActiveTrue(pageNo,pageSize);
     }
 
-    @PostMapping("/getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId")
-    public DataResult<List<JobAdvertDto>> getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(@RequestParam int pageNo,@RequestParam  int pageSize, int workTimeId,int workPlaceId,int cityId) {
-        return this.jobAdvertService.getByIsConfirmTrueAndWorkTimeIdAndWorkPlaceIdAndCityId(pageNo,pageSize,workTimeId,workPlaceId,cityId);
-    }
 
     @PostMapping("/getByFilter")
     public DataResult<List<JobAdvert>> getByFilter(JobAdvertFilterDto jobAdvertFilterDto, @RequestParam int pageNo,@RequestParam  int pageSize) {
