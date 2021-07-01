@@ -50,7 +50,8 @@ public class EmployerUpdateManager implements EmployerUpdateService {
 
         Employer employer = this.employerDao.getById(employerUpdate.getEmployerId());
 
-
+        //employer.setConfirm(false);
+        employerUpdate.setConfirm(false);
         this.employerUpdateDao.save(employerUpdate);
         employer.setUpdateRequest(true);
 
@@ -72,7 +73,7 @@ public class EmployerUpdateManager implements EmployerUpdateService {
         EmployerUpdate employerUpdate = this.employerUpdateDao.getById(employerUpdateId);
         Employer employer = this.employerDao.getById(employerUpdate.getEmployerId());
 
-        employerUpdate.setConfirmed(true);
+        employerUpdate.setConfirm(true);
         employerUpdate.setEmployeeId(employeeId);
         employerUpdate.setConfirmedAt(LocalDate.now());
 

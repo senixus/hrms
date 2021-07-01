@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class EmployerValidationManager implements ValidationService<Employer> {
 
@@ -22,7 +23,7 @@ public class EmployerValidationManager implements ValidationService<Employer> {
 
 
     @Autowired
-    public EmployerValidationManager(EmployerDao employerDao, UserDao userDao, ActivationCodeService activationCodeService,ConfirmEmployerService confirmEmployerService){
+    public EmployerValidationManager(EmployerDao employerDao, UserDao userDao, ActivationCodeService activationCodeService, ConfirmEmployerService confirmEmployerService) {
         this.employerDao = employerDao;
         this.userDao = userDao;
         this.activationCodeService = activationCodeService;
@@ -31,25 +32,25 @@ public class EmployerValidationManager implements ValidationService<Employer> {
 
     @Override
     public DataResult<List<Employer>> getAll() {
-        return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(),"Employers have been listed");
+        return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(), "Employers have been listed");
     }
 
     @Override
     public Result add(Employer employer) {
         String[] email = employer.getEmail().split("@");
 
-        if(!email[1].equals(employer.getWebsite())){
+        if (!email[1].equals(employer.getWebsite())) {
             return new ErrorResult("Website must be equal your email");
         }
 
-        if(this.userDao.existsByEmail(employer.getEmail())){
+        if (this.userDao.existsByEmail(employer.getEmail())) {
             return new ErrorResult("Email already exist");
         }
-        if(!employer.getPassword().equals(employer.getConfirmPassword())){
+        if (!employer.getPassword().equals(employer.getConfirmPassword())) {
             return new ErrorResult("Passwords do not match");
         }
         employer.setUpdateRequest(false);
-        employer.setConfirmed(false);
+        employer.setConfirm(false);
 
         this.employerDao.save(employer);
         this.activationCodeService.createActivationCode(this.userDao.getOne(employer.getId()));
@@ -63,16 +64,16 @@ public class EmployerValidationManager implements ValidationService<Employer> {
 
         String[] email = employer.getEmail().split("@");
 
-        if(!email[1].equals(employer.getWebsite())){
+        if (!email[1].equals(employer.getWebsite())) {
             return new ErrorResult("Website must be equal your email");
         }
 
-        if(this.userDao.existsByEmail(employer.getEmail())){
+        if (this.userDao.existsByEmail(employer.getEmail())) {
             return new ErrorResult("Email already exist");
         }
 
-        if(!this.userDao.existsById(employer.getId())){
-            return  new ErrorResult("User have not found");
+        if (!this.userDao.existsById(employer.getId())) {
+            return new ErrorResult("User have not found");
         }
 
         this.employerDao.save(employer);

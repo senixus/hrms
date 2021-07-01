@@ -33,7 +33,9 @@ public class ConfirmEmployerManager implements ConfirmEmployerService {
         ConfirmEmployer confirmEmployer = new ConfirmEmployer();
         confirmEmployer.setEmployerId(employer.getId());
         confirmEmployer.setConfirmed(false);
+
         confirmEmployer.setEmployeeId(0);
+
         this.confirmEmployerDao.save(confirmEmployer);
 
     }
@@ -52,7 +54,8 @@ public class ConfirmEmployerManager implements ConfirmEmployerService {
             return new ErrorResult("Employee has not found");
         }
 
-        employer.setConfirmed(true);
+
+        employer.setConfirm(true);
         this.employerDao.save(employer);
 
         confirmEmployer.setConfirmed(true);

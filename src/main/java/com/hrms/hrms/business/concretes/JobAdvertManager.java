@@ -87,7 +87,7 @@ public class JobAdvertManager implements JobAdvertService {
         }
 
         if (jobAdvert.isActive() && jobAdvert.isConfirm()) {
-            return new ErrorResult("This job advert have already confirmed");
+            return new ErrorResult("This job advert has already confirmed");
         }
 
         jobAdvert.setConfirm(true);

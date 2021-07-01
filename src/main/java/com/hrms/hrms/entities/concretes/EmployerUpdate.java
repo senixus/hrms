@@ -44,8 +44,8 @@ public class EmployerUpdate {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "is_confirmed")
-    private boolean isConfirmed;
+    @Column(name = "is_confirm")
+    private boolean isConfirm;
 
     @Column(name = "created_at")
     private LocalDate createdAt = LocalDate.now();
