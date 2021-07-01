@@ -1,5 +1,6 @@
 package com.hrms.hrms.core.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,4 +36,8 @@ public class User {
     @NotBlank(message = "Confirm password cannot be empty")
     @Transient
     private String confirmPassword;
+
+    @JsonIgnore
+    @Column(name = "is_confirmed")
+    private boolean isConfirmed = false;
 }

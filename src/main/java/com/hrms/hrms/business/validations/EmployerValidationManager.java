@@ -1,9 +1,12 @@
 package com.hrms.hrms.business.validations;
 
+import com.hrms.hrms.business.abstracts.ActivationCodeService;
+import com.hrms.hrms.business.abstracts.ConfirmEmployerService;
 import com.hrms.hrms.business.abstracts.ValidationService;
 import com.hrms.hrms.core.dataAccess.UserDao;
 import com.hrms.hrms.core.utilities.results.*;
 import com.hrms.hrms.dataAccess.abstracts.EmployerDao;
+import com.hrms.hrms.entities.concretes.ActivationCode;
 import com.hrms.hrms.entities.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +17,16 @@ public class EmployerValidationManager implements ValidationService<Employer> {
 
     private EmployerDao employerDao;
     private UserDao userDao;
+    private ActivationCodeService activationCodeService;
+    private ConfirmEmployerService confirmEmployerService;
+
 
     @Autowired
-    public EmployerValidationManager(EmployerDao employerDao, UserDao userDao){
+    public EmployerValidationManager(EmployerDao employerDao, UserDao userDao, ActivationCodeService activationCodeService,ConfirmEmployerService confirmEmployerService){
         this.employerDao = employerDao;
         this.userDao = userDao;
+        this.activationCodeService = activationCodeService;
+        this.confirmEmployerService = confirmEmployerService;
     }
 
     @Override
@@ -42,7 +50,11 @@ public class EmployerValidationManager implements ValidationService<Employer> {
         }
         employer.setUpdateRequest(false);
         employer.setConfirmed(false);
+
         this.employerDao.save(employer);
+        this.activationCodeService.createActivationCode(this.userDao.getOne(employer.getId()));
+        this.confirmEmployerService.createConfirmEmployer(employer);
+        this.activationCodeService.sendEmail(employer.getEmail());
         return new SuccessResult("Employer has been added");
     }
 

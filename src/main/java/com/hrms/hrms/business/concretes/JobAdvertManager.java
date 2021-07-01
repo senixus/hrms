@@ -1,6 +1,5 @@
 package com.hrms.hrms.business.concretes;
 
-import com.hrms.hrms.business.abstracts.ConfirmJobAdvertService;
 import com.hrms.hrms.business.abstracts.JobAdvertService;
 import com.hrms.hrms.core.dataAccess.UserDao;
 import com.hrms.hrms.core.utilities.dtoConverter.DtoConverterService;
@@ -13,7 +12,6 @@ import com.hrms.hrms.entities.concretes.JobAdvert;
 import com.hrms.hrms.entities.dtos.JobAdvertAddDto;
 import com.hrms.hrms.entities.dtos.JobAdvertDto;
 import com.hrms.hrms.entities.dtos.JobAdvertFilterDto;
-import org.apache.tomcat.jni.Local;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

@@ -1,44 +1,33 @@
 package com.hrms.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
-@Table(name = "activation_codes")
-public class ActivationCode {
+@Table(name = "confirm_employers")
+public class ConfirmEmployer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private User userId;
+    @Column(name = "employer_id")
+    private int employerId;
 
-    @Column(name = "activation_code")
-    private String activationCode;
+    @Column(name = "employee_id")
+    private int employeeId;
 
     @Column(name = "is_confirmed")
     private boolean isConfirmed;
 
     @Column(name = "confirmed_at")
     private LocalDate confirmedAt;
-
-    @Column(name = "created_at")
-    private LocalDate createdAt;
-
-
-
-
 }
